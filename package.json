@@ -1,0 +1,17 @@
+{
+  "name": "smtp-nvr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "dotenv": "^8.0.0",
+    "smtp-server": "^3.5.0",
+    "telegraf": "^3.29.0"
+  }
+}
