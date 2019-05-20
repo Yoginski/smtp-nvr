@@ -13,5 +13,10 @@
     "dotenv": "^8.0.0",
     "smtp-server": "^3.5.0",
     "telegraf": "^3.29.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2"
   }
 }
