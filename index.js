@@ -22,7 +22,11 @@ const server = new SMTPServer({
       const images = msg.attachments
         .filter(a => a.contentType === 'image/jpeg')
         .map(a => a.content);
-      await tg.sendPictures(caption, images);
+      if (images.length > 0) {
+        await tg.sendPictures(caption, images);
+      } else {
+        await tg.notify(caption);
+      }
     } catch (e) {
       await tg.notify(`Failed to process message: ${e.toString()}`)
         .catch(console.log.bind(console));
