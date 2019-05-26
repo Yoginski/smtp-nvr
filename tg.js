@@ -13,12 +13,17 @@ function notify(data) {
   return bot.telegram.sendMessage(config.TG_CHANNEL_ID, data);
 }
 
-function sendImage(caption, source) {
-  return bot.telegram.sendPhoto(config.TG_CHANNEL_ID, { source }, { caption });
+function sendPictures(caption, images) {
+  const sources = images.map(i => ({
+    caption,
+    type: 'photo',
+    media: { source: i },
+  }));
+  return bot.telegram.sendMediaGroup(config.TG_CHANNEL_ID, sources);
 }
 
 module.exports = {
   initialize,
-  sendImage,
+  sendPictures,
   notify,
 };

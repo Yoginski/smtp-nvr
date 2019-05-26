@@ -19,9 +19,10 @@ const server = new SMTPServer({
     try {
       const msg = await simpleParser(stream);
       const caption = msg.text;
-      await Promise.all(msg.attachments
+      const images = msg.attachments
         .filter(a => a.contentType === 'image/jpeg')
-        .map(a => tg.sendImage(caption, a.content)));
+        .map(a => a.content);
+      await tg.sendPictures(caption, images);
     } catch (e) {
       await tg.notify(`Failed to process message: ${e.toString()}`)
         .catch(console.log.bind(console));
