@@ -11,6 +11,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "dotenv": "^8.0.0",
+    "mailparser": "^2.7.1",
     "pm2": "^3.5.1",
     "smtp-server": "^3.5.0",
     "telegraf": "^3.29.0"

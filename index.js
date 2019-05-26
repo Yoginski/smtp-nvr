@@ -1,4 +1,5 @@
 const { SMTPServer } = require('smtp-server');
+const { simpleParser } = require('mailparser');
 const config = require('./config');
 const tg = require('./tg');
 
@@ -14,13 +15,19 @@ const server = new SMTPServer({
     callback();
   },
 
-  onData: (stream, sess, callback) => {
-    let content = '';
-    stream.on('data', (d) => { content += d; });
-    stream.on('end', () => {
-      tg.notify(content);
+  onData: async (stream, sess, callback) => {
+    try {
+      const msg = await simpleParser(stream);
+      const caption = msg.text;
+      await Promise.all(msg.attachments
+        .filter(a => a.contentType === 'image/jpeg')
+        .map(a => tg.sendImage(caption, a.content)));
+    } catch (e) {
+      await tg.notify(`Failed to process message: ${e.toString()}`)
+        .catch(console.log.bind(console));
+    } finally {
       callback();
-    });
+    }
   },
 });
 
