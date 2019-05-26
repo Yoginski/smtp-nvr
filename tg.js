@@ -9,7 +9,7 @@ function initialize() {
 }
 
 function notify(data) {
-  bot.sendMessage(config.TG_CHANNEL_ID, data);
+  bot.telegram.sendMessage(config.TG_CHANNEL_ID, data);
   console.log(data);
 }
 
