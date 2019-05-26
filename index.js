@@ -1,5 +1,8 @@
 const { SMTPServer } = require('smtp-server');
 const config = require('./config');
+const tg = require('./tg');
+
+tg.initialize();
 
 const server = new SMTPServer({
   logger: true,
@@ -15,7 +18,7 @@ const server = new SMTPServer({
     let content = '';
     stream.on('data', (d) => { content += d; });
     stream.on('end', () => {
-      // notify tg here
+      tg.notify(content);
       callback();
     });
   },
